@@ -7,6 +7,6 @@
 pip install -r requirement.txt
 
 # read CDF file
-python readCDF.py CDF-file-namee
+python readCDF.py CDF-file-name
 ```
 
