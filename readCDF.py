@@ -36,7 +36,6 @@ def main():
             if j > 32767:
                 j -= 65536
             wave2.append(j)
-    print(wave1[0])
 
     while(1):
         print('\n The number of total data points is ' + str(len(wave1)) + '.')
