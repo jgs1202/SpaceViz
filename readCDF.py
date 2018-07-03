@@ -4,7 +4,6 @@ import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import fftpack
 os.environ["CDF_LIB"] = '~/PerlCDF36_4/blib/lib/auto'
 from spacepy import pycdf
 
@@ -40,7 +39,7 @@ def main():
     print(wave1[0])
 
     while(1):
-        print('The number of total data points is ' + str(len(wave1)) + '.')
+        print('\n The number of total data points is ' + str(len(wave1)) + '.')
         print('Specify the interval you want to see. Press Ctrl + C to quit.')
         while(1):
             start = input('start point: ')
@@ -62,6 +61,8 @@ def main():
         f_sam = 65536
         sp1 = np.fft.fft(e1)
         sp2 = np.fft.fft(e2)
+        po1 = abs(sp1) ** 2 / len(e1)
+        po2 = abs(sp2) ** 2 / len(e2)
         sp1 = sp1.real
         sp2 = sp1.real
         fr1 = np.fft.fftfreq(len(e1), d=1/f_sam)
@@ -70,9 +71,9 @@ def main():
         ax1.set_title('E1')
         ax3.plot(xx, e2)
         ax3.set_title('E2')
-        ax2.plot(fr1, sp1)
+        ax2.plot(fr1, po1)
         ax2.set_title('Spectrum1')
-        ax4.plot(fr2, sp2)
+        ax4.plot(fr2, po2)
         ax4.set_title('Spectrum2')
         plt.show()
 
