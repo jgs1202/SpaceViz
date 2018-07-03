@@ -6,7 +6,7 @@
 # install dependencies
 pip install -r requirement.txt
 
-# read CDF file
+# read CDF file and analyze
 python readCDF.py CDF-file-name
 ```
 

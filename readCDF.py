@@ -4,13 +4,13 @@ import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import fftpack
 os.environ["CDF_LIB"] = '~/PerlCDF36_4/blib/lib/auto'
 from spacepy import pycdf
 
 
 def read(file):
     cdf = pycdf.CDF(file)
-    # print(cdf)
     return cdf
 
 
