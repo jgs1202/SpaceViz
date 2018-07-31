@@ -4,21 +4,23 @@ import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+# CDF用の環境変数の指定
 os.environ["CDF_LIB"] = '~/PerlCDF36_4/blib/lib/auto'
 from spacepy import pycdf
 
 
+# cdfファイルの読み込み
 def read(file):
     cdf = pycdf.CDF(file)
     return cdf
 
 
 def main():
+    # 読み込むファイルの指定
     argvs = sys.argv
     argc = len(argvs)
-
     if argc != 2:
-        print('Please give only one argument: the path of a cdf')
+        print('Please give only one argument: the path of a cdf file.')
     else:
         print('loading...')
         data = read(argvs[1])
@@ -26,6 +28,7 @@ def main():
     wave1 = []
     wave2 = []
 
+    # 補数の補正
     for i in data['e1_waveform']:
         for j in i:
             if j > 32767:
@@ -37,7 +40,9 @@ def main():
                 j -= 65536
             wave2.append(j)
 
+    # 可視化開始
     while(1):
+        # 可視化範囲の指定
         print('\n The number of total data points is ' + str(len(wave1)) + '.')
         print('Specify the interval you want to see. Press Ctrl + C to quit.')
         while(1):
@@ -51,6 +56,7 @@ def main():
                 print('Only an integer is valid.')
         e1 = wave1[start: end]
         e2 = wave2[start: end]
+        # 可視化
         xx = np.arange(start, end)
         fig = plt.figure()
         ax1 = fig.add_subplot(2, 2, 1)
@@ -71,14 +77,12 @@ def main():
         ax3.plot(xx, e2)
         ax3.set_title('E2')
         ax2.plot(fr1, po1)
-        # ax2.set_xlim(0, 10000)
         ax2.set_ylim(0.1, 10 ** 8)
         ax2.set_xscale('log')
         ax2.set_yscale('log')
         ax2.set_title('Spectrum1')
         ax4.plot(fr2, po2)
         ax4.set_title('Spectrum2')
-        # ax4.set_xlim(0, 10000)
         ax4.set_ylim(0.1, 10 ** 8)
         ax4.set_xscale('log')
         ax4.set_yscale('log')
