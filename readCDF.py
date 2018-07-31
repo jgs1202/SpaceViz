@@ -71,9 +71,17 @@ def main():
         ax3.plot(xx, e2)
         ax3.set_title('E2')
         ax2.plot(fr1, po1)
+        # ax2.set_xlim(0, 10000)
+        ax2.set_ylim(0.1, 10 ** 8)
+        ax2.set_xscale('log')
+        ax2.set_yscale('log')
         ax2.set_title('Spectrum1')
         ax4.plot(fr2, po2)
         ax4.set_title('Spectrum2')
+        # ax4.set_xlim(0, 10000)
+        ax4.set_ylim(0.1, 10 ** 8)
+        ax4.set_xscale('log')
+        ax4.set_yscale('log')
         plt.show()
 
 
